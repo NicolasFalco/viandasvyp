@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Viandas del Día</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+background:#f5f5f0;
+min-height:100vh;
+padding:20px 16px 40px;
+}
+
+.header{text-align:center;margin-bottom:28px;padding-top:8px}
+.header-emoji{font-size:40px;margin-bottom:8px}
+.header h1{font-size:22px;font-weight:600;color:#1a1a1a}
+.header .fecha{font-size:14px;color:#666;margin-top:4px}
+
+.section{margin-bottom:24px}
+.section-title{
+font-size:13px;
+font-weight:700;
+color:#888;
+text-transform:uppercase;
+letter-spacing:.5px;
+margin-bottom:12px;
+}
+
+.menu-card{
+background:white;
+border-radius:16px;
+padding:16px;
+margin-bottom:10px;
+border:2.5px solid transparent;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:14px;
+box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+
+.menu-card.selected{
+border-color:#e8604c;
+box-shadow:0 0 0 4px rgba(232,96,76,.12);
+}
+
+.menu-radio{
+width:22px;
+height:22px;
+border-radius:50%;
+border:2px solid #ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.menu-card.selected .menu-radio{border-color:#e8604c}
+
+.menu-radio-dot{
+width:11px;
+height:11px;
+border-radius:50%;
+background:#e8604c;
+display:none;
+}
+
+.menu-card.selected .menu-radio-dot{display:block}
+
+.menu-info{flex:1}
+
+.menu-name{
+font-size:16px;
+font-weight:600;
+color:#1a1a1a;
+margin-bottom:2px;
+}
+
+.menu-desc{
+font-size:13px;
+color:#666;
+}
+
+.menu-price{
+font-size:16px;
+font-weight:700;
+color:#e8604c;
+}
+
+.delivery-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.delivery-btn{
+background:white;
+border-radius:14px;
+padding:14px;
+border:2.5px solid transparent;
+cursor:pointer;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+
+.delivery-btn.selected{
+border-color:#e8604c;
+box-shadow:0 0 0 4px rgba(232,96,76,.12);
+}
+
+.delivery-icon{font-size:26px}
+
+.form-group{margin-bottom:14px}
+
+.form-input,.form-textarea{
+width:100%;
+padding:13px 14px;
+border-radius:12px;
+border:1.5px solid #e0e0e0;
+font-size:16px;
+}
+
+.form-textarea{
+min-height:70px;
+resize:none;
+}
+
+.campo-direccion{display:none}
+.campo-direccion.show{display:block}
+
+.error-msg{
+font-size:13px;
+color:#e8604c;
+margin-top:5px;
+display:none;
+}
+
+.btn-enviar{
+width:100%;
+padding:16px;
+background:#e8604c;
+color:white;
+border:none;
+border-radius:14px;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 4px 14px rgba(232,96,76,.3);
+}
+
+.success-screen{
+display:none;
+text-align:center;
+padding:60px 20px;
+}
+
+.success-screen.show{display:block}
+
+.success-icon{font-size:64px;margin-bottom:16px}
+
+.no-menu{text-align:center;padding:40px 20px}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<div class="header">
+<div class="header-emoji">
+    <img src="img/logo.jpg" alt="Logo">
+</div>
+<h1>Viandas del Día</h1>
+<div class="fecha" id="fecha-hoy"></div>
+</div>
+
+<div id="main-form">
+
+<div class="section">
+<div class="section-title">Elegí tu menú</div>
+<div id="menus-container"></div>
+<div class="error-msg" id="err-menu">Elegí un menú</div>
+</div>
+
+<div class="section">
+<div class="section-title">¿Cómo lo recibís?</div>
+
+<div class="delivery-row">
+
+<div class="delivery-btn" id="btn-delivery" onclick="elegirEntrega('delivery')">
+<div class="delivery-icon">🛵</div>
+Delivery
+</div>
+
+<div class="delivery-btn" id="btn-retiro" onclick="elegirEntrega('retiro')">
+<div class="delivery-icon">🏪</div>
+Retiro
+</div>
+
+</div>
+
+<div class="error-msg" id="err-entrega">Elegí tipo de entrega</div>
+
+</div>
+
+<div class="section">
+
+<div class="form-group">
+<input class="form-input" id="input-nombre" placeholder="Nombre y apellido">
+</div>
+
+<div class="form-group campo-direccion" id="campo-direccion">
+<textarea class="form-textarea" id="input-dir" placeholder="Dirección"></textarea>
+</div>
+
+<div class="error-msg" id="err-datos">Ingresá tu nombre</div>
+<div class="error-msg" id="err-dir">Ingresá tu dirección</div>
+
+</div>
+
+<button class="btn-enviar" onclick="enviarPedido()">Confirmar pedido</button>
+
+</div>
+
+<div class="success-screen" id="success-screen">
+<div class="success-icon">✅</div>
+<h2>¡Pedido enviado!</h2>
+<p id="success-msg"></p>
+</div>
+
+</div>
+
+<script>
+
+const firebaseConfig={
+apiKey:"AIzaSyBX2oTaSDwZ3seylEtpu_kJHHB1ByQC08I",
+authDomain:"programamama-9e397.firebaseapp.com",
+databaseURL:"https://programamama-9e397-default-rtdb.firebaseio.com",
+projectId:"programamama-9e397",
+storageBucket:"programamama-9e397.appspot.com",
+messagingSenderId:"673966928018",
+appId:"1:673966928018:web:cd634d4eb0a8ec4764b64b"
+}
+
+firebase.initializeApp(firebaseConfig)
+const database=firebase.database()
+
+const HOY=new Date()
+
+function fechaClave(){
+return HOY.getFullYear()+"-"+(HOY.getMonth()+1)+"-"+HOY.getDate()
+}
+
+document.getElementById("fecha-hoy").innerText=
+HOY.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"})
+
+let menusFirebase=[]
+let menuSeleccionado=null
+let entregaSeleccionada=null
+
+function cargarMenus(){
+
+database.ref("menus/"+fechaClave()).on("value",snap=>{
+
+const data=snap.val()
+
+if(!data){
+document.getElementById("menus-container").innerHTML=
+'<div class="no-menu">Menú no disponible</div>'
+return
+}
+
+menusFirebase=[data.menu1,data.menu2]
+
+document.getElementById("menus-container").innerHTML=
+
+menusFirebase.map((m,i)=>`
+
+<div class="menu-card" onclick="elegirMenu(${i})">
+
+<div class="menu-radio">
+<div class="menu-radio-dot"></div>
+</div>
+
+<div class="menu-info">
+<div class="menu-name">${m.nombre}</div>
+${m.descripcion?`<div class="menu-desc">${m.descripcion}</div>`:''}
+</div>
+
+${m.precio?`<div class="menu-price">$${m.precio}</div>`:''}
+
+</div>
+
+`).join("")
+
+})
+
+}
+
+function elegirMenu(i){
+menuSeleccionado=i
+document.querySelectorAll(".menu-card")
+.forEach((c,idx)=>c.classList.toggle("selected",idx===i))
+document.getElementById("err-menu").style.display="none"
+}
+
+function elegirEntrega(tipo){
+
+entregaSeleccionada=tipo
+
+document.getElementById("btn-delivery").classList.toggle("selected",tipo==="delivery")
+document.getElementById("btn-retiro").classList.toggle("selected",tipo==="retiro")
+
+document.getElementById("campo-direccion").classList.toggle("show",tipo==="delivery")
+
+}
+
+function enviarPedido(){
+
+let ok=true
+
+if(menuSeleccionado===null){
+document.getElementById("err-menu").style.display="block"
+ok=false
+}
+
+if(!entregaSeleccionada){
+document.getElementById("err-entrega").style.display="block"
+ok=false
+}
+
+const nombre=document.getElementById("input-nombre").value.trim()
+
+if(!nombre){
+document.getElementById("err-datos").style.display="block"
+ok=false
+}
+
+const dir=document.getElementById("input-dir").value.trim()
+
+if(entregaSeleccionada==="delivery"&&!dir){
+document.getElementById("err-dir").style.display="block"
+ok=false
+}
+if(!ok)return
+
+const menu=menusFirebase[menuSeleccionado]
+
+const hora=new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"})
+
+database.ref("pedidos/"+fechaClave()).push({
+menu:menu.nombre,
+entrega:entregaSeleccionada,
+direccion:dir||"-",
+nombre:nombre,
+hora:hora
+})
+
+const wa="5493571636737"
+
+let msg=`🍱 Nuevo pedido
+Menú: ${menu.nombre}
+Entrega: ${entregaSeleccionada}
+Nombre: ${nombre}`
+
+if(entregaSeleccionada==="delivery"){
+msg+=`\nDirección: ${dir}`
+}
+
+window.open("https://wa.me/"+wa+"?text="+encodeURIComponent(msg),"_blank")
+
+document.getElementById("main-form").style.display="none"
+document.getElementById("success-screen").classList.add("show")
+document.getElementById("success-msg").innerText="Gracias "+nombre
+
+}
+
+cargarMenus()
+
+</script>
+
+</body>
+</html>

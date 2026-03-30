@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Panel - Viandas</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+background:#f5f5f0;
+min-height:100vh;
+padding:20px 16px 50px;
+}
+
+.header{text-align:center;margin-bottom:24px}
+.header h1{font-size:20px;font-weight:700;color:#1a1a1a}
+.header .sub{font-size:13px;color:#888;margin-top:3px}
+
+.tabs{
+display:flex;
+background:white;
+border-radius:14px;
+padding:4px;
+margin-bottom:20px;
+box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+
+.tab{
+flex:1;
+padding:10px 6px;
+border:none;
+background:transparent;
+font-size:13px;
+font-weight:600;
+color:#999;
+border-radius:10px;
+cursor:pointer;
+}
+
+.tab.active{
+background:#e8604c;
+color:white;
+}
+
+.panel{display:none}
+.panel.show{display:block}
+
+.section-title{
+font-size:12px;
+font-weight:700;
+color:#888;
+text-transform:uppercase;
+letter-spacing:0.5px;
+margin-bottom:10px;
+}
+
+.card{
+background:white;
+border-radius:16px;
+padding:16px;
+margin-bottom:14px;
+box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+
+.form-label{
+font-size:13px;
+font-weight:600;
+color:#444;
+margin-bottom:6px;
+display:block;
+}
+
+.form-input,.form-textarea{
+width:100%;
+padding:12px 14px;
+border-radius:12px;
+border:1.5px solid #e0e0e0;
+font-size:15px;
+background:white;
+}
+
+.form-textarea{min-height:65px}
+
+.form-group{margin-bottom:12px}
+
+.btn-guardar{
+width:100%;
+padding:15px;
+background:#e8604c;
+color:white;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+}
+
+.btn-mini{
+padding:10px 16px;
+background:#1a1a1a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:13px;
+font-weight:600;
+cursor:pointer;
+}
+
+.toast{
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+background:#1a1a1a;
+color:white;
+padding:12px 22px;
+border-radius:50px;
+font-size:14px;
+opacity:0;
+transition:opacity .3s;
+}
+
+.toast.show{opacity:1}
+
+.estado-hoy{
+padding:10px 14px;
+border-radius:10px;
+font-size:14px;
+font-weight:600;
+text-align:center;
+margin-bottom:14px;
+}
+
+.estado-hoy.ok{
+background:#e8f8f0;
+color:#1a7a4a;
+}
+
+.estado-hoy.vacio{
+background:#fff3f0;
+color:#c0392b;
+}
+
+.pedido-item{
+background:white;
+border-radius:14px;
+padding:14px;
+margin-bottom:10px;
+box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+
+.pedido-top{
+display:flex;
+justify-content:space-between;
+margin-bottom:6px;
+}
+
+.pedido-nombre{
+font-size:15px;
+font-weight:600;
+}
+
+.pedido-hora{
+font-size:12px;
+color:#aaa;
+}
+
+.pedido-menu{
+font-size:14px;
+margin-bottom:4px;
+}
+
+.pedido-dir{
+font-size:12px;
+color:#888;
+margin-top:4px;
+}
+
+.sin-pedidos{
+text-align:center;
+padding:40px;
+color:#bbb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div style="font-size:32px;margin-bottom:4px">⚙️</div>
+<h1>Panel de administración</h1>
+<div class="sub" id="fecha-admin"></div>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="cambiarTab('menus')">📋 Menús</button>
+<button class="tab" onclick="cambiarTab('pedidos')">📦 Pedidos</button>
+<button class="tab" onclick="cambiarTab('config')">⚙️ Config</button>
+</div>
+
+<!-- MENUS -->
+<div class="panel show" id="panel-menus">
+
+<div id="estado-hoy-box"></div>
+
+<div class="section-title">Menú 1</div>
+<div class="card">
+
+<div class="form-group">
+<label class="form-label">Nombre</label>
+<input class="form-input" id="m1-nombre">
+</div>
+
+<div class="form-group">
+<label class="form-label">Descripción</label>
+<textarea class="form-textarea" id="m1-desc"></textarea>
+</div>
+
+<div class="form-group">
+<label class="form-label">Precio</label>
+<input class="form-input" id="m1-precio">
+</div>
+
+</div>
+
+<div class="section-title">Menú 2</div>
+<div class="card">
+
+<div class="form-group">
+<label class="form-label">Nombre</label>
+<input class="form-input" id="m2-nombre">
+</div>
+
+<div class="form-group">
+<label class="form-label">Descripción</label>
+<textarea class="form-textarea" id="m2-desc"></textarea>
+</div>
+
+<div class="form-group">
+<label class="form-label">Precio</label>
+<input class="form-input" id="m2-precio">
+</div>
+
+</div>
+
+<button class="btn-guardar" onclick="guardarMenus()">Guardar menús del día</button>
+
+</div>
+
+<!-- PEDIDOS -->
+<div class="panel" id="panel-pedidos">
+<div id="lista-pedidos"></div>
+</div>
+
+<!-- CONFIG -->
+<div class="panel" id="panel-config">
+
+<div class="section-title">Nombre del negocio</div>
+
+<div class="card">
+<input class="form-input" id="config-nombre">
+<button class="btn-mini" onclick="guardarNombre()">Guardar</button>
+</div>
+
+<div class="section-title">WhatsApp</div>
+
+<div class="card">
+<input class="form-input" id="config-wa">
+<button class="btn-mini" onclick="guardarWA()">Guardar</button>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const firebaseConfig={
+apiKey:"AIzaSyBX2oTaSDwZ3seylEtpu_kJHHB1ByQC08I",
+authDomain:"programamama-9e397.firebaseapp.com",
+databaseURL:"https://programamama-9e397-default-rtdb.firebaseio.com",
+projectId:"programamama-9e397",
+storageBucket:"programamama-9e397.appspot.com",
+messagingSenderId:"673966928018",
+appId:"1:673966928018:web:cd634d4eb0a8ec4764b64b"
+}
+
+firebase.initializeApp(firebaseConfig)
+const database=firebase.database()
+
+const HOY=new Date()
+
+function fechaClave(){
+return HOY.getFullYear()+"-"+(HOY.getMonth()+1)+"-"+HOY.getDate()
+}
+
+document.getElementById("fecha-admin").innerText=
+HOY.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"})
+
+function mostrarToast(msg){
+const t=document.getElementById("toast")
+t.textContent=msg
+t.classList.add("show")
+setTimeout(()=>t.classList.remove("show"),2500)
+}
+
+function cambiarTab(tab){
+
+["menus","pedidos","config"].forEach((t,i)=>{
+
+document.querySelectorAll(".tab")[i]
+.classList.toggle("active",t===tab)
+
+document.getElementById("panel-"+t)
+.classList.toggle("show",t===tab)
+
+})
+
+if(tab==="pedidos") escucharPedidos()
+
+}
+
+function guardarMenus(){
+
+const m1=document.getElementById("m1-nombre").value.trim()
+const m2=document.getElementById("m2-nombre").value.trim()
+
+if(!m1||!m2){
+mostrarToast("Completá los dos menús")
+return
+}
+
+const menus={
+menu1:{
+nombre:m1,
+descripcion:document.getElementById("m1-desc").value.trim(),
+precio:document.getElementById("m1-precio").value.trim()
+},
+menu2:{
+nombre:m2,
+descripcion:document.getElementById("m2-desc").value.trim(),
+precio:document.getElementById("m2-precio").value.trim()
+}
+}
+
+database.ref("menus/"+fechaClave()).set(menus)
+
+mostrarToast("Menús guardados")
+
+verificarEstadoHoy()
+
+}
+
+function verificarEstadoHoy(){
+
+database.ref("menus/"+fechaClave()).once("value",snap=>{
+
+const data=snap.val()
+const box=document.getElementById("estado-hoy-box")
+
+if(data){
+
+box.innerHTML=
+'<div class="estado-hoy ok">Menús cargados</div>'
+
+document.getElementById("m1-nombre").value=data.menu1.nombre
+document.getElementById("m1-desc").value=data.menu1.descripcion
+document.getElementById("m1-precio").value=data.menu1.precio||""
+
+document.getElementById("m2-nombre").value=data.menu2.nombre
+document.getElementById("m2-desc").value=data.menu2.descripcion
+document.getElementById("m2-precio").value=data.menu2.precio||""
+
+}else{
+
+box.innerHTML=
+'<div class="estado-hoy vacio">No cargaste menús hoy</div>'
+
+}
+
+})
+
+}
+
+function escucharPedidos(){
+
+database.ref("pedidos/"+fechaClave()).on("value",snap=>{
+
+const data=snap.val()
+
+if(!data){
+document.getElementById("lista-pedidos").innerHTML=
+'<div class="sin-pedidos">Sin pedidos</div>'
+return
+}
+
+const pedidos=Object.values(data)
+
+document.getElementById("lista-pedidos").innerHTML=
+
+pedidos.reverse().map(p=>`
+
+<div class="pedido-item">
+
+<div class="pedido-top">
+<div class="pedido-nombre">${p.nombre}</div>
+<div class="pedido-hora">${p.hora}</div>
+</div>
+
+<div class="pedido-menu">${p.menu}</div>
+
+${p.entrega==="delivery"
+?`<div class="pedido-dir">${p.direccion}</div>`
+:""}
+
+</div>
+
+`).join("")
+
+})
+
+}
+
+function guardarNombre(){
+
+const n=document.getElementById("config-nombre").value.trim()
+
+if(!n)return
+
+database.ref("config/nombre").set(n)
+
+mostrarToast("Nombre guardado")
+
+}
+
+function guardarWA(){
+
+const wa=document.getElementById("config-wa").value.trim()
+
+if(!wa)return
+
+database.ref("config/whatsapp").set(wa)
+
+mostrarToast("WhatsApp guardado")
+
+}
+
+function cargarConfig(){
+
+database.ref("config").once("value",snap=>{
+
+const data=snap.val()
+
+if(!data)return
+
+if(data.nombre)
+document.getElementById("config-nombre").value=data.nombre
+
+if(data.whatsapp)
+document.getElementById("config-wa").value=data.whatsapp
+
+})
+
+}
+
+verificarEstadoHoy()
+cargarConfig()
+
+</script>
+
+</body>
+</html>
+
