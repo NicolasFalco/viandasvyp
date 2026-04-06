@@ -1,0 +1,224 @@
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#f5f5f0;
+  min-height:100vh;
+  padding:20px 16px 40px;
+}
+
+.header{text-align:center;margin-bottom:28px;padding-top:8px}
+.header-emoji{font-size:40px;margin-bottom:8px}
+.header h1{font-size:22px;font-weight:600;color:#1a1a1a}
+.header .fecha{font-size:14px;color:#666;margin-top:4px}
+
+.section{margin-bottom:24px}
+.section-title{
+  font-size:13px;
+  font-weight:700;
+  color:#888;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:12px;
+}
+
+/* ── Tarjeta de menú ── */
+.menu-card{
+  background:white;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:10px;
+  border:2.5px solid transparent;
+  cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+  transition:border-color .15s, box-shadow .15s;
+}
+
+.menu-card.selected{
+  border-color:#e8604c;
+  box-shadow:0 0 0 4px rgba(232,96,76,.12);
+}
+
+.menu-top{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.menu-check{
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  border:2px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:border-color .15s, background .15s;
+}
+
+.menu-card.selected .menu-check{
+  border-color:#e8604c;
+  background:#e8604c;
+}
+
+.menu-check-icon{
+  color:white;
+  font-size:13px;
+  display:none;
+}
+
+.menu-card.selected .menu-check-icon{display:block}
+
+.menu-info{flex:1}
+
+.menu-name{
+  font-size:16px;
+  font-weight:600;
+  color:#1a1a1a;
+  margin-bottom:2px;
+}
+
+.menu-desc{
+  font-size:13px;
+  color:#666;
+}
+
+.menu-price{
+  font-size:16px;
+  font-weight:700;
+  color:#e8604c;
+  flex-shrink:0;
+}
+
+/* ── Selector de cantidad ── */
+.cantidad-row{
+  display:none;
+  align-items:center;
+  gap:0;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #f0f0f0;
+}
+
+.menu-card.selected .cantidad-row{display:flex}
+
+.cantidad-label{
+  font-size:13px;
+  font-weight:600;
+  color:#555;
+  flex:1;
+}
+
+.cantidad-ctrl{
+  display:flex;
+  align-items:center;
+  gap:0;
+  background:#f5f5f0;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.cant-btn{
+  width:36px;
+  height:36px;
+  border:none;
+  background:transparent;
+  font-size:20px;
+  font-weight:600;
+  color:#e8604c;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+.cant-btn:active{background:rgba(232,96,76,.1)}
+
+.cant-num{
+  min-width:32px;
+  text-align:center;
+  font-size:16px;
+  font-weight:700;
+  color:#1a1a1a;
+}
+
+/* ── Delivery ── */
+.delivery-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.delivery-btn{
+  background:white;
+  border-radius:14px;
+  padding:14px;
+  border:2.5px solid transparent;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+
+.delivery-btn.selected{
+  border-color:#e8604c;
+  box-shadow:0 0 0 4px rgba(232,96,76,.12);
+}
+
+.delivery-icon{font-size:26px}
+
+/* ── Formulario ── */
+.form-group{margin-bottom:14px}
+
+.form-input,.form-textarea{
+  width:100%;
+  padding:13px 14px;
+  border-radius:12px;
+  border:1.5px solid #e0e0e0;
+  font-size:16px;
+}
+
+.form-textarea{
+  min-height:70px;
+  resize:none;
+}
+
+.campo-direccion{display:none}
+.campo-direccion.show{display:block}
+
+.error-msg{
+  font-size:13px;
+  color:#e8604c;
+  margin-top:5px;
+  display:none;
+}
+
+.btn-enviar{
+  width:100%;
+  padding:16px;
+  background:#e8604c;
+  color:white;
+  border:none;
+  border-radius:14px;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(232,96,76,.3);
+}
+
+/* ── Pantalla de éxito ── */
+.success-screen{
+  display:none;
+  text-align:center;
+  padding:60px 20px;
+}
+
+.success-screen.show{display:block}
+.success-icon{font-size:64px;margin-bottom:16px}
+
+.no-menu{text-align:center;padding:40px 20px;color:#666;line-height:1.6}
