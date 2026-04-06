@@ -1,8 +1,20 @@
-const HOY = new Date()
+/* ── Helpers de fecha ── */
+function horaArgentina() {
+  const ahora = new Date()
+  return new Date(ahora.toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }))
+}
 
 function fechaClave() {
-  return HOY.getFullYear() + "-" + (HOY.getMonth() + 1) + "-" + HOY.getDate()
+  const ahora = horaArgentina()
+  const hora = ahora.getHours()
+  const fecha = new Date(ahora)
+  if (hora >= 20) {
+    fecha.setDate(fecha.getDate() + 1)
+  }
+  return fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate()
 }
+
+const HOY = horaArgentina()
 
 document.getElementById("fecha-admin").innerText =
   HOY.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })
@@ -86,7 +98,6 @@ function escucharPedidos() {
 
     document.getElementById("lista-pedidos").innerHTML =
       pedidos.reverse().map(p => {
-        // menus es un array de { menu, cantidad }
         const itemsTexto = Array.isArray(p.menus)
           ? p.menus.map(m => `${m.cantidad}x ${m.menu}`).join(", ")
           : p.menu || "-"
