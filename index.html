@@ -12,10 +12,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-background:#f5f5f0;
-min-height:100vh;
-padding:20px 16px 40px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#f5f5f0;
+  min-height:100vh;
+  padding:20px 16px 40px;
 }
 
 .header{text-align:center;margin-bottom:28px;padding-top:8px}
@@ -25,59 +25,58 @@ padding:20px 16px 40px;
 
 .section{margin-bottom:24px}
 .section-title{
-font-size:13px;
-font-weight:700;
-color:#888;
-text-transform:uppercase;
-letter-spacing:.5px;
-margin-bottom:12px;
+  font-size:13px;
+  font-weight:700;
+  color:#888;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:12px;
 }
 
 /* ── Tarjeta de menú ── */
 .menu-card{
-background:white;
-border-radius:16px;
-padding:16px;
-margin-bottom:10px;
-border:2.5px solid transparent;
-cursor:pointer;
-box-shadow:0 1px 4px rgba(0,0,0,.06);
-transition:border-color .15s, box-shadow .15s;
+  background:white;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:10px;
+  border:2.5px solid transparent;
+  cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+  transition:border-color .15s, box-shadow .15s;
 }
 
 .menu-card.selected{
-border-color:#e8604c;
-box-shadow:0 0 0 4px rgba(232,96,76,.12);
+  border-color:#e8604c;
+  box-shadow:0 0 0 4px rgba(232,96,76,.12);
 }
 
-/* fila superior: checkbox + info + precio */
 .menu-top{
-display:flex;
-align-items:center;
-gap:14px;
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
 .menu-check{
-width:22px;
-height:22px;
-border-radius:6px;
-border:2px solid #ddd;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-shrink:0;
-transition:border-color .15s, background .15s;
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  border:2px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:border-color .15s, background .15s;
 }
 
 .menu-card.selected .menu-check{
-border-color:#e8604c;
-background:#e8604c;
+  border-color:#e8604c;
+  background:#e8604c;
 }
 
 .menu-check-icon{
-color:white;
-font-size:13px;
-display:none;
+  color:white;
+  font-size:13px;
+  display:none;
 }
 
 .menu-card.selected .menu-check-icon{display:block}
@@ -85,100 +84,100 @@ display:none;
 .menu-info{flex:1}
 
 .menu-name{
-font-size:16px;
-font-weight:600;
-color:#1a1a1a;
-margin-bottom:2px;
+  font-size:16px;
+  font-weight:600;
+  color:#1a1a1a;
+  margin-bottom:2px;
 }
 
 .menu-desc{
-font-size:13px;
-color:#666;
+  font-size:13px;
+  color:#666;
 }
 
 .menu-price{
-font-size:16px;
-font-weight:700;
-color:#e8604c;
-flex-shrink:0;
+  font-size:16px;
+  font-weight:700;
+  color:#e8604c;
+  flex-shrink:0;
 }
 
 /* ── Selector de cantidad ── */
 .cantidad-row{
-display:none;
-align-items:center;
-gap:0;
-margin-top:12px;
-padding-top:12px;
-border-top:1px solid #f0f0f0;
+  display:none;
+  align-items:center;
+  gap:0;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #f0f0f0;
 }
 
 .menu-card.selected .cantidad-row{display:flex}
 
 .cantidad-label{
-font-size:13px;
-font-weight:600;
-color:#555;
-flex:1;
+  font-size:13px;
+  font-weight:600;
+  color:#555;
+  flex:1;
 }
 
 .cantidad-ctrl{
-display:flex;
-align-items:center;
-gap:0;
-background:#f5f5f0;
-border-radius:10px;
-overflow:hidden;
+  display:flex;
+  align-items:center;
+  gap:0;
+  background:#f5f5f0;
+  border-radius:10px;
+  overflow:hidden;
 }
 
 .cant-btn{
-width:36px;
-height:36px;
-border:none;
-background:transparent;
-font-size:20px;
-font-weight:600;
-color:#e8604c;
-cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-line-height:1;
+  width:36px;
+  height:36px;
+  border:none;
+  background:transparent;
+  font-size:20px;
+  font-weight:600;
+  color:#e8604c;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
 }
 
 .cant-btn:active{background:rgba(232,96,76,.1)}
 
 .cant-num{
-min-width:32px;
-text-align:center;
-font-size:16px;
-font-weight:700;
-color:#1a1a1a;
+  min-width:32px;
+  text-align:center;
+  font-size:16px;
+  font-weight:700;
+  color:#1a1a1a;
 }
 
 /* ── Delivery ── */
 .delivery-row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
 .delivery-btn{
-background:white;
-border-radius:14px;
-padding:14px;
-border:2.5px solid transparent;
-cursor:pointer;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:6px;
-box-shadow:0 1px 4px rgba(0,0,0,.06);
+  background:white;
+  border-radius:14px;
+  padding:14px;
+  border:2.5px solid transparent;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
 }
 
 .delivery-btn.selected{
-border-color:#e8604c;
-box-shadow:0 0 0 4px rgba(232,96,76,.12);
+  border-color:#e8604c;
+  box-shadow:0 0 0 4px rgba(232,96,76,.12);
 }
 
 .delivery-icon{font-size:26px}
@@ -187,52 +186,52 @@ box-shadow:0 0 0 4px rgba(232,96,76,.12);
 .form-group{margin-bottom:14px}
 
 .form-input,.form-textarea{
-width:100%;
-padding:13px 14px;
-border-radius:12px;
-border:1.5px solid #e0e0e0;
-font-size:16px;
+  width:100%;
+  padding:13px 14px;
+  border-radius:12px;
+  border:1.5px solid #e0e0e0;
+  font-size:16px;
 }
 
 .form-textarea{
-min-height:70px;
-resize:none;
+  min-height:70px;
+  resize:none;
 }
 
 .campo-direccion{display:none}
 .campo-direccion.show{display:block}
 
 .error-msg{
-font-size:13px;
-color:#e8604c;
-margin-top:5px;
-display:none;
+  font-size:13px;
+  color:#e8604c;
+  margin-top:5px;
+  display:none;
 }
 
 .btn-enviar{
-width:100%;
-padding:16px;
-background:#e8604c;
-color:white;
-border:none;
-border-radius:14px;
-font-size:17px;
-font-weight:700;
-cursor:pointer;
-box-shadow:0 4px 14px rgba(232,96,76,.3);
+  width:100%;
+  padding:16px;
+  background:#e8604c;
+  color:white;
+  border:none;
+  border-radius:14px;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(232,96,76,.3);
 }
 
 /* ── Pantalla de éxito ── */
 .success-screen{
-display:none;
-text-align:center;
-padding:60px 20px;
+  display:none;
+  text-align:center;
+  padding:60px 20px;
 }
 
 .success-screen.show{display:block}
 .success-icon{font-size:64px;margin-bottom:16px}
 
-.no-menu{text-align:center;padding:40px 20px}
+.no-menu{text-align:center;padding:40px 20px;color:#666;line-height:1.6}
 </style>
 </head>
 
@@ -240,110 +239,142 @@ padding:60px 20px;
 
 <div id="app">
 
-<div class="header">
-  <div class="header-emoji">
-    <img src="img/logo.jpg" alt="Logo">
-  </div>
-  <h1>Viandas del Día</h1>
-  <div class="fecha" id="fecha-hoy"></div>
-</div>
-
-<div id="main-form">
-
-  <div class="section">
-    <div class="section-title">Elegí tu menú</div>
-    <div id="menus-container"></div>
-    <div class="error-msg" id="err-menu">Elegí al menos un menú</div>
+  <div class="header">
+    <div class="header-emoji">
+      <img src="img/logo.jpg" alt="Logo">
+    </div>
+    <h1>Viandas del Día</h1>
+    <div class="fecha" id="fecha-hoy"></div>
   </div>
 
-  <div class="section">
-    <div class="section-title">¿Cómo lo recibís?</div>
-    <div class="delivery-row">
-      <div class="delivery-btn" id="btn-delivery" onclick="elegirEntrega('delivery')">
-        <div class="delivery-icon">🛵</div>
-        Delivery
+  <div id="main-form">
+
+    <div class="section">
+      <div class="section-title">Elegí tu menú</div>
+      <div id="menus-container"></div>
+      <div class="error-msg" id="err-menu">Elegí al menos un menú</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">¿Cómo lo recibís?</div>
+      <div class="delivery-row">
+        <div class="delivery-btn" id="btn-delivery" onclick="elegirEntrega('delivery')">
+          <div class="delivery-icon">🛵</div>
+          Delivery
+        </div>
+        <div class="delivery-btn" id="btn-retiro" onclick="elegirEntrega('retiro')">
+          <div class="delivery-icon">🏪</div>
+          Retiro
+        </div>
       </div>
-      <div class="delivery-btn" id="btn-retiro" onclick="elegirEntrega('retiro')">
-        <div class="delivery-icon">🏪</div>
-        Retiro
+      <div class="error-msg" id="err-entrega">Elegí tipo de entrega</div>
+    </div>
+
+    <div class="section">
+      <div class="form-group">
+        <input class="form-input" id="input-nombre" placeholder="Nombre y apellido">
       </div>
+      <div class="form-group campo-direccion" id="campo-direccion">
+        <textarea class="form-textarea" id="input-dir" placeholder="Dirección"></textarea>
+      </div>
+      <div class="error-msg" id="err-datos">Ingresá tu nombre</div>
+      <div class="error-msg" id="err-dir">Ingresá tu dirección</div>
     </div>
-    <div class="error-msg" id="err-entrega">Elegí tipo de entrega</div>
+
+    <button class="btn-enviar" onclick="enviarPedido()">Confirmar pedido</button>
+
   </div>
 
-  <div class="section">
-    <div class="form-group">
-      <input class="form-input" id="input-nombre" placeholder="Nombre y apellido">
-    </div>
-    <div class="form-group campo-direccion" id="campo-direccion">
-      <textarea class="form-textarea" id="input-dir" placeholder="Dirección"></textarea>
-    </div>
-    <div class="error-msg" id="err-datos">Ingresá tu nombre</div>
-    <div class="error-msg" id="err-dir">Ingresá tu dirección</div>
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✅</div>
+    <h2>¡Pedido enviado!</h2>
+    <p id="success-msg"></p>
   </div>
-
-  <button class="btn-enviar" onclick="enviarPedido()">Confirmar pedido</button>
-
-</div>
-
-<div class="success-screen" id="success-screen">
-  <div class="success-icon">✅</div>
-  <h2>¡Pedido enviado!</h2>
-  <p id="success-msg"></p>
-</div>
 
 </div>
 
 <script>
 
-const firebaseConfig={
-  apiKey:"AIzaSyBX2oTaSDwZ3seylEtpu_kJHHB1ByQC08I",
-  authDomain:"programamama-9e397.firebaseapp.com",
-  databaseURL:"https://programamama-9e397-default-rtdb.firebaseio.com",
-  projectId:"programamama-9e397",
-  storageBucket:"programamama-9e397.appspot.com",
-  messagingSenderId:"673966928018",
-  appId:"1:673966928018:web:cd634d4eb0a8ec4764b64b"
+/* ── Firebase ── */
+const firebaseConfig = {
+  apiKey: "AIzaSyBX2oTaSDwZ3seylEtpu_kJHHB1ByQC08I",
+  authDomain: "programamama-9e397.firebaseapp.com",
+  databaseURL: "https://programamama-9e397-default-rtdb.firebaseio.com",
+  projectId: "programamama-9e397",
+  storageBucket: "programamama-9e397.appspot.com",
+  messagingSenderId: "673966928018",
+  appId: "1:673966928018:web:cd634d4eb0a8ec4764b64b"
 }
 
 firebase.initializeApp(firebaseConfig)
-const database=firebase.database()
+const database = firebase.database()
 
-const HOY=new Date()
+/* ── Estado global ── */
+let menusFirebase = []
+let fechaMenuActual = null   // fecha del menú que se está mostrando (para guardar pedido)
+let seleccion = [
+  { seleccionado: false, cantidad: 1 },
+  { seleccionado: false, cantidad: 1 }
+]
+let entregaSeleccionada = null
 
-function fechaClave(){
-  return HOY.getFullYear()+"-"+(HOY.getMonth()+1)+"-"+HOY.getDate()
+/* ── Helpers de fecha ── */
+function horaArgentina() {
+  // Devuelve un Date con la hora local de Argentina (America/Argentina/Buenos_Aires)
+  const ahora = new Date()
+  return new Date(ahora.toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }))
 }
 
-document.getElementById("fecha-hoy").innerText=
-  HOY.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"})
+function claveFecha(d) {
+  return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate()
+}
 
-let menusFirebase=[]
-// Estado: para cada índice de menú, si está seleccionado y la cantidad
-let seleccion=[
-  {seleccionado:false, cantidad:1},
-  {seleccionado:false, cantidad:1}
-]
-let entregaSeleccionada=null
+/* ── Fecha visible en el header ── */
+// Mostramos la fecha de Argentina al cargar
+const horaAR = horaArgentina()
+document.getElementById("fecha-hoy").innerText =
+  horaAR.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })
 
-/* ── Render de menús ── */
-function cargarMenus(){
-  database.ref("menus/"+fechaClave()).on("value",snap=>{
-    const data=snap.val()
-    if(!data){
-      document.getElementById("menus-container").innerHTML=
+/* ── Carga de menús ── */
+function cargarMenus() {
+  const ahora = horaArgentina()
+  const hora = ahora.getHours()  // 0-23 en hora argentina
+
+  // Fuera de horario: entre 13:00 y 19:59 no se aceptan pedidos
+  if (hora >= 13 && hora < 20) {
+    document.getElementById("menus-container").innerHTML =
+      '<div class="no-menu">🕙 Los pedidos están disponibles<br>de 20:00 a 13:00 hs</div>'
+    return
+  }
+
+  // Calcular la fecha del menú:
+  // - De 20:00 a 23:59 → el menú es del día SIGUIENTE
+  // - De 00:00 a 12:59 → el menú es del día ACTUAL (ya cargado la noche anterior)
+  const fechaMenu = new Date(ahora)
+  if (hora >= 20) {
+    fechaMenu.setDate(fechaMenu.getDate() + 1)
+  }
+
+  // Guardamos globalmente para usarla al guardar el pedido
+  fechaMenuActual = fechaMenu
+
+  database.ref("menus/" + claveFecha(fechaMenu)).on("value", snap => {
+    const data = snap.val()
+    if (!data) {
+      document.getElementById("menus-container").innerHTML =
         '<div class="no-menu">Menú no disponible</div>'
       return
     }
-    menusFirebase=[data.menu1, data.menu2]
+    menusFirebase = [data.menu1, data.menu2]
     renderMenus()
   })
 }
 
-function renderMenus(){
-  document.getElementById("menus-container").innerHTML=
-    menusFirebase.map((m,i)=>`
-      <div class="menu-card${seleccion[i].seleccionado?' selected':''}" onclick="toggleMenu(${i})">
+/* ── Render de tarjetas de menú ── */
+function renderMenus() {
+  document.getElementById("menus-container").innerHTML =
+    menusFirebase.map((m, i) => `
+      <div class="menu-card${seleccion[i].seleccionado ? ' selected' : ''}" onclick="toggleMenu(${i})">
 
         <div class="menu-top">
           <div class="menu-check">
@@ -351,9 +382,9 @@ function renderMenus(){
           </div>
           <div class="menu-info">
             <div class="menu-name">${m.nombre}</div>
-            ${m.descripcion?`<div class="menu-desc">${m.descripcion}</div>`:''}
+            ${m.descripcion ? `<div class="menu-desc">${m.descripcion}</div>` : ''}
           </div>
-          ${m.precio?`<div class="menu-price">$${m.precio}</div>`:''}
+          ${m.precio ? `<div class="menu-price">$${m.precio}</div>` : ''}
         </div>
 
         <div class="cantidad-row">
@@ -369,92 +400,104 @@ function renderMenus(){
     `).join("")
 }
 
-function toggleMenu(i){
-  seleccion[i].seleccionado=!seleccion[i].seleccionado
-  if(!seleccion[i].seleccionado) seleccion[i].cantidad=1
+function toggleMenu(i) {
+  seleccion[i].seleccionado = !seleccion[i].seleccionado
+  if (!seleccion[i].seleccionado) seleccion[i].cantidad = 1
   renderMenus()
-  document.getElementById("err-menu").style.display="none"
+  document.getElementById("err-menu").style.display = "none"
 }
 
-function cambiarCantidad(e, i, delta){
-  e.stopPropagation()           // evita que el click cierre la tarjeta
-  const nueva=seleccion[i].cantidad+delta
-  if(nueva<1) return
-  seleccion[i].cantidad=nueva
-  document.getElementById("cant-"+i).textContent=nueva
+function cambiarCantidad(e, i, delta) {
+  e.stopPropagation()  // evita que el click cierre la tarjeta
+  const nueva = seleccion[i].cantidad + delta
+  if (nueva < 1) return
+  seleccion[i].cantidad = nueva
+  document.getElementById("cant-" + i).textContent = nueva
 }
 
-/* ── Entrega ── */
-function elegirEntrega(tipo){
-  entregaSeleccionada=tipo
-  document.getElementById("btn-delivery").classList.toggle("selected",tipo==="delivery")
-  document.getElementById("btn-retiro").classList.toggle("selected",tipo==="retiro")
-  document.getElementById("campo-direccion").classList.toggle("show",tipo==="delivery")
-  document.getElementById("err-entrega").style.display="none"
+/* ── Elección de entrega ── */
+function elegirEntrega(tipo) {
+  entregaSeleccionada = tipo
+  document.getElementById("btn-delivery").classList.toggle("selected", tipo === "delivery")
+  document.getElementById("btn-retiro").classList.toggle("selected", tipo === "retiro")
+  document.getElementById("campo-direccion").classList.toggle("show", tipo === "delivery")
+  document.getElementById("err-entrega").style.display = "none"
 }
 
-/* ── Envío ── */
-function enviarPedido(){
+/* ── Envío del pedido ── */
+function enviarPedido() {
+  let ok = true
 
-  let ok=true
-
-  const algunoSeleccionado=seleccion.some(s=>s.seleccionado)
-  if(!algunoSeleccionado){
-    document.getElementById("err-menu").style.display="block"
-    ok=false
+  // Validar menú
+  const algunoSeleccionado = seleccion.some(s => s.seleccionado)
+  if (!algunoSeleccionado) {
+    document.getElementById("err-menu").style.display = "block"
+    ok = false
   }
 
-  if(!entregaSeleccionada){
-    document.getElementById("err-entrega").style.display="block"
-    ok=false
+  // Validar entrega
+  if (!entregaSeleccionada) {
+    document.getElementById("err-entrega").style.display = "block"
+    ok = false
   }
 
-  const nombre=document.getElementById("input-nombre").value.trim()
-  if(!nombre){
-    document.getElementById("err-datos").style.display="block"
-    ok=false
+  // Validar nombre
+  const nombre = document.getElementById("input-nombre").value.trim()
+  if (!nombre) {
+    document.getElementById("err-datos").style.display = "block"
+    ok = false
   }
 
-  const dir=document.getElementById("input-dir").value.trim()
-  if(entregaSeleccionada==="delivery"&&!dir){
-    document.getElementById("err-dir").style.display="block"
-    ok=false
+  // Validar dirección (solo si delivery)
+  const dir = document.getElementById("input-dir").value.trim()
+  if (entregaSeleccionada === "delivery" && !dir) {
+    document.getElementById("err-dir").style.display = "block"
+    ok = false
   }
 
-  if(!ok) return
+  if (!ok) return
 
-  const hora=new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"})
+  // Hora de confirmación en formato legible
+  const horaConfirmacion = horaArgentina().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" })
 
   // Armar líneas de pedido
-  const lineasPedido=seleccion
-    .map((s,i)=>s.seleccionado?{menu:menusFirebase[i].nombre, cantidad:s.cantidad}:null)
+  const lineasPedido = seleccion
+    .map((s, i) => s.seleccionado ? { menu: menusFirebase[i].nombre, cantidad: s.cantidad } : null)
     .filter(Boolean)
 
-  // Guardar en Firebase
-  database.ref("pedidos/"+fechaClave()).push({
+  // Clave de Firebase: usa la fecha del menú que se mostró
+  // (misma lógica que cargarMenus, así pedidos y menús quedan sincronizados)
+  const claveGuardado = fechaMenuActual
+    ? claveFecha(fechaMenuActual)
+    : claveFecha(horaArgentina())
+
+  // Guardar pedido en Firebase bajo la fecha correcta del menú
+  database.ref("pedidos/" + claveGuardado).push({
     menus: lineasPedido,
     entrega: entregaSeleccionada,
-    direccion: dir||"-",
+    direccion: dir || "-",
     nombre: nombre,
-    hora: hora
+    hora: horaConfirmacion
   })
 
-  // Armar mensaje WhatsApp
-  const wa="5493571636737"
-  const itemsTexto=lineasPedido
-    .map(l=>`  • ${l.cantidad}x ${l.menu}`)
+  // Armar y abrir mensaje de WhatsApp
+  const wa = "5493571636737"
+  const itemsTexto = lineasPedido
+    .map(l => `  • ${l.cantidad}x ${l.menu}`)
     .join("\n")
 
-  let msg=`🍱 Nuevo pedido\n${itemsTexto}\nEntrega: ${entregaSeleccionada}\nNombre: ${nombre}`
-  if(entregaSeleccionada==="delivery") msg+=`\nDirección: ${dir}`
+  let msg = `🍱 Nuevo pedido\n${itemsTexto}\nEntrega: ${entregaSeleccionada}\nNombre: ${nombre}`
+  if (entregaSeleccionada === "delivery") msg += `\nDirección: ${dir}`
 
-  window.open("https://wa.me/"+wa+"?text="+encodeURIComponent(msg),"_blank")
+  window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(msg), "_blank")
 
-  document.getElementById("main-form").style.display="none"
+  // Mostrar pantalla de éxito
+  document.getElementById("main-form").style.display = "none"
   document.getElementById("success-screen").classList.add("show")
-  document.getElementById("success-msg").innerText="Gracias "+nombre
+  document.getElementById("success-msg").innerText = "Gracias " + nombre
 }
 
+/* ── Inicio ── */
 cargarMenus()
 
 </script>
